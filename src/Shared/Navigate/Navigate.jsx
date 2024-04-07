@@ -1,16 +1,27 @@
 import {  NavLink } from 'react-router-dom';
 import profile from '../../../src/assets/user.png'
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
-const Navbar = () => {
+const Navigate = () => {
+ const {user} = useContext(AuthContext)
+ const {logOut} = useContext(AuthContext)
 
+ const handlelogOut = () =>  {
+  logOut()
+  .then()
+  .catch()
+ }
     const Link = <>
     <li> <NavLink to="/" >Home</NavLink> </li>
     <li> <NavLink to="/about" >About</NavLink></li>
     <li> <NavLink to="/career" >Career</NavLink></li>
+    <li> <NavLink to="/login" >Login</NavLink></li>
+    <li> <NavLink to="/register" >Register</NavLink></li>
     
     </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 ">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -35,10 +46,14 @@ const Navbar = () => {
   <div className="w-10 mr-5 rounded-full">
           <img  alt="Tailwind CSS Navbar component" src={profile} />
         </div>
-   <button className='btn '>Login</button>
+   {
+    user ?
+    <button onClick={handlelogOut} className='btn'>SignOut</button>:
+    <NavLink  to='/login'><button className='btn '>Login</button></NavLink>
+   }
   </div>
 </div>
     );
 };
 
-export default Navbar;
+export default Navigate;

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../Shared/Header/Header';
-import Navbar from '../../Shared/Navbar/Navbar';
+
 import LeftsideNav from '../../Shared/LeftsideNav/LeftsideNav';
 import Rightside from '../../Shared/RightsideNav/Rightside';
 import BreakingNews from '../../Shared/BreakingNews/BreakingNews';
 import Marquee from "react-fast-marquee";
 import NewsPortal from '../../Shared/NewsPortal/NewsPortal';
+import Navbar from '../../Shared/Navigate/Navigate';
+import Navigate from '../../Shared/Navigate/Navigate';
+import {  useLoaderData,} from "react-router-dom"
 
 const Home = () => {
- const [news,setNews] = useState([])
+
  const [categories,setCategories] = useState([])
-    useEffect(()=>{
-        fetch('news.json')
-        .then(res => res.json())
-        .then(data=> setNews(data) )
-    })
+   
+ const news = useLoaderData()
+
 
     useEffect(()=>{
         fetch('categories.json')
@@ -31,7 +32,9 @@ const Home = () => {
            </Marquee>
          </div>
          
-            <Navbar></Navbar>
+           <div>
+        <Navigate></Navigate>
+           </div>
             
 
            <div className='grid grid-cols-1 md:grid-cols-4 gap-6 '>
